@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [1.0.4] - Unreleased
 
+### Added
+
+- Add SitesReplication icon and update diagram generation logic in Get-AbrDiagSite function
+
 ### Changed
 
 - Bump module version to `1.0.4`

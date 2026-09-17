@@ -37,17 +37,17 @@ function Get-AbrDiagSite {
                             if ($SitesInfo.Site) {
                                 foreach ($SitesObj in $SitesInfo) {
                                     $Site = Remove-SpecialCharacter -String "$($SitesObj.Name)" -SpecialChars '\-. '
-                                    Add-NodeIcon -Name $Site -FontBold -IconType 'NoIcon' -ImagesObj $Images -NodeObject -GraphvizAttributes @{Label = $SitesObj.Name; shape = 'rectangle'; labelloc = 'c'; penwidth = 0; fillColor = '#b14b5a' }
+                                    Add-NodeIcon -Name $Site -FontBold -IconDebug $IconDebug -IconType 'NoIcon' -ImagesObj $Images -NodeObject -GraphvizAttributes @{Label = $SitesObj.Name; shape = 'rectangle'; labelloc = 'c'; penwidth = 0; fillColor = '#b14b5a' }
                                     foreach ($Link in $SitesObj.SiteLink) {
                                         # Start - Information for each SiteLink. Example: "Name: (Pharmax-to-Acad) SiteLink (Cost: 10) (Frequency: 15 minutes)"
                                         $SiteLink = Remove-SpecialCharacter -String $Link.Name -SpecialChars '\-. '
-                                        Add-NodeIcon -Name $SiteLink -IconType 'NoIcon' -ImagesObj $Images -NodeObject -GraphvizAttributes @{Label = (Add-HtmlTable -Name SiteLink -Align 'Center' -IconDebug $IconDebug -Rows ($Link.AditionalInfo.GetEnumerator() | ForEach-Object { "$($_.key): $($_.value)" }) -ColumnSize 1 -FontSize 12 -FontColor $Fontcolor -TableBackgroundColor $MainGraphBGColor); shape = 'plain'; fillColor = 'transparent' }
+                                        Add-NodeIcon -Name $SiteLink -IconDebug $IconDebug -IconType 'NoIcon' -ImagesObj $Images -NodeObject -GraphvizAttributes @{Label = (Add-HtmlTable -Name SiteLink -Align 'Center' -IconDebug $IconDebug -Rows ($Link.AditionalInfo.GetEnumerator() | ForEach-Object { "$($_.key): $($_.value)" }) -ColumnSize 1 -FontSize 18 -FontColor $Fontcolor -TableBackgroundColor $MainGraphBGColor); shape = 'plain'; fillColor = 'transparent' }
                                         Add-NodeEdge -From $Site -To $SiteLink -EdgeLength 2 -EdgeStyle 'dashed' -EdgeColor $Edgecolor -EdgeThickness 1 -Arrowtail none -Arrowhead none
                                         # End - Information for each SiteLink
                                         foreach ($SiteLinkSite in $Link.Sites) {
                                             # Start - Information for each connected Site. Example: "Name: (Pharmax)"
                                             $SiteIncluded = Remove-SpecialCharacter -String $SiteLinkSite -SpecialChars '\-. '
-                                            Add-NodeIcon -Name $SiteIncluded -FontBold -IconType 'NoIcon' -ImagesObj $Images -NodeObject -GraphvizAttributes @{Label = $SiteLinkSite; shape = 'rectangle'; labelloc = 'c'; penwidth = 0; fillColor = '#b2b2b2'; color = '#3b3b3b'; fontsize = 18 }
+                                            Add-NodeIcon -Name $SiteIncluded -FontBold -IconType 'AD_Site_Replications' -ImagesObj $Images -NodeObject -FontSize 18 -LabelName $SiteLinkSite -IconDebug $IconDebug
                                             Add-NodeEdge -From $SiteLink -To $SiteIncluded -EdgeLength 2 -EdgeStyle 'dashed' -EdgeColor $Edgecolor -EdgeThickness 1 -Arrowtail none -Arrowhead normal
                                         }
                                     }
