@@ -15,7 +15,7 @@ function Start-AsBuiltReportMSAD {
     .NOTES
         Requirements:
             PowerShell 7.4+                       — to run this script
-            GliderUI 0.2.0+  (auto-installed on first run) — Install-PSResource -Name GliderUI -Version 0.2.0 -Scope CurrentUser -TrustRepository
+            GliderUI 0.4.1+  (auto-installed on first run) — Install-PSResource -Name GliderUI -Version 0.4.1 -Scope CurrentUser -TrustRepository
             AsBuiltReport.Core                    — Install-PSResource -Name AsBuiltReport.Core
             AsBuiltReport.Microsoft.AD            — Install-PSResource -Name AsBuiltReport.Microsoft.AD
     #>
@@ -38,7 +38,7 @@ function Start-AsBuiltReportMSAD {
     }
 
     # ── Bootstrap GliderUI ──────────────────────────────────────────────────────
-    $requiredGliderUIVersion = [version]'0.2.0'
+    $requiredGliderUIVersion = [version]'0.4.1'
 
     if (-not (Get-Module -ListAvailable -Name GliderUI)) {
         Write-Host 'GliderUI not found — installing from PSGallery…' -ForegroundColor Cyan
